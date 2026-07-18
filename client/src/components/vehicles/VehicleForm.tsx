@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { vehiclesApi } from '../../api/vehiclesApi';
-import { type Vehicle } from '../../types/vehicle';
+import type { Vehicle } from '../../types/vehicle';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 import { Toast } from '../ui/Toast';
@@ -18,12 +18,20 @@ export const VehicleForm = ({ initial, onSuccess }: VehicleFormProps) => {
   const [category, setCategory] = useState(initial?.category ?? '');
   const [price, setPrice] = useState(initial?.price ?? '');
   const [quantity, setQuantity] = useState(initial?.quantity?.toString() ?? '');
+  const [imageUrl, setImageUrl] = useState(initial?.image_url ?? '');
   const [error, setError] = useState<string | null>(null);
 
   const mutation = useMutation({
     mutationFn: () => {
-      const payload = { make, model, category, price: Number(price), quantity: Number(quantity) };
-      return initial ? vehiclesApi.update(initial.id, payload) : vehiclesApi.create(payload);
+      const payload = {
+        make,
+        model,
+        category,
+        price: Number(price),
+        quantity: Number(quantity),
+        image_url: imageUrl || undefined,
+      };
+      return initial ? vehiclesApi.update(initial.id, payload) : vehiclesApi.create(payload as any);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vehicles'] });
@@ -44,22 +52,19 @@ export const VehicleForm = ({ initial, onSuccess }: VehicleFormProps) => {
       <Input id="make" label="Make" value={make} onChange={(e) => setMake(e.target.value)} required />
       <Input id="model" label="Model" value={model} onChange={(e) => setModel(e.target.value)} required />
       <Input id="category" label="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
+      <Input id="price" label="Price" type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
+      <Input id="quantity" label="Quantity" type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} required />
       <Input
-        id="price"
-        label="Price"
-        type="number"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        required
+        id="image-url"
+        label="Image URL"
+        type="url"
+        placeholder="https://…"
+        value={imageUrl}
+        onChange={(e) => setImageUrl(e.target.value)}
       />
-      <Input
-        id="quantity"
-        label="Quantity"
-        type="number"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-        required
-      />
+      {imageUrl && (
+        <img src={imageUrl} alt="Preview" className="h-32 w-full rounded-md border border-steel/20 object-cover" />
+      )}
       <Button type="submit" isLoading={mutation.isPending}>
         {initial ? 'Save changes' : 'Add vehicle'}
       </Button>

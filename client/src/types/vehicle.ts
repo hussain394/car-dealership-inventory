@@ -5,6 +5,8 @@ export interface Vehicle {
   category: string;
   price: string;
   quantity: number;
+  image_url: string | null;
+
 }
 
 export interface VehicleFilters {
@@ -21,4 +23,4 @@ export interface VehicleInput {
   category: string;
   price: number;
   quantity: number;
-}
+}

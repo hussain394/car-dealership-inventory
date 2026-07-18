@@ -8,17 +8,19 @@ export interface VehicleRecord {
   category: string;
   price: string;
   quantity: number;
+  image_url: string | null;
+
 }
 
 export const vehiclesRepository = {
   create: async (input: CreateVehicleInput): Promise<VehicleRecord> => {
-    const result = await query(
-      `INSERT INTO vehicles (make, model, category, price, quantity)
-       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [input.make, input.model, input.category, input.price, input.quantity]
-    );
-    return result.rows[0];
-  },
+  const result = await query(
+    `INSERT INTO vehicles (make, model, category, price, quantity, image_url)
+     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+    [input.make, input.model, input.category, input.price, input.quantity, input.image_url || null]
+  );
+  return result.rows[0];
+},
 
   findAll: async (): Promise<VehicleRecord[]> => {
     const result = await query('SELECT * FROM vehicles ORDER BY created_at DESC');
