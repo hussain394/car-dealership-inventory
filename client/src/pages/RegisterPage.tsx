@@ -1,3 +1,7 @@
-export const RegisterPage = () => {
-  return <div className="p-6">RegisterPage — to be built in Phase 7/8</div>;
-};
+import { RegisterForm } from '../components/auth/RegisterForm';
+
+export const RegisterPage = () => (
+  <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
+    <RegisterForm />
+  </div>
+);

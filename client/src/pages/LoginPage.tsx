@@ -1,3 +1,9 @@
-export const LoginPage = () => {
-  return <div className="p-6">LoginPage — to be built in Phase 7/8</div>;
-};
+import { LoginForm } from '../components/auth/LoginForm';
+
+export const LoginPage = () => (
+  <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
+    <LoginForm />
+  </div>
+);
+
+
