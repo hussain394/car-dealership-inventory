@@ -1,14 +1,14 @@
 import { apiClient } from './apiClient';
-import type { Vehicle, VehicleFilters } from '../types/vehicle';
+import type { Vehicle, VehicleFilters, VehicleInput } from '../types/vehicle';
 
 export const vehiclesApi = {
   list: () => apiClient.get<Vehicle[]>('/vehicles'),
 
   search: (filters: VehicleFilters) => apiClient.get<Vehicle[]>('/vehicles/search', { params: filters }),
 
-  create: (data: Omit<Vehicle, 'id'>) => apiClient.post<Vehicle>('/vehicles', data),
+  create: (data: VehicleInput) => apiClient.post<Vehicle>('/vehicles', data),
 
-  update: (id: number, data: Partial<Omit<Vehicle, 'id'>>) =>
+  update: (id: number, data: Partial<VehicleInput>) =>
     apiClient.put<Vehicle>(`/vehicles/${id}`, data),
 
   remove: (id: number) => apiClient.delete(`/vehicles/${id}`),
