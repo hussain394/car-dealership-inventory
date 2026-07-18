@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  
-    "scripts": {
-  "dev": "ts-node-dev --respawn src/server.ts",
-  "build": "tsc",
-  "start": "node dist/server.js",
-  "test": "jest",
-  "test:watch": "jest --watch",
-  "test:coverage": "jest --coverage",
-  "lint": "eslint src --ext .ts"
-
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "jest --testPathIgnorePatterns=integration",
+    "test:integration": "dotenv -e .env.test -- jest --runInBand --testPathPatterns=integration",
+    "test:all": "npm run test && npm run test:integration",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --testPathIgnorePatterns=integration",
+    "lint": "eslint src --ext .ts"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +21,8 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.6.0",
     "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
@@ -39,14 +39,15 @@
     "@types/node": "^26.1.1",
     "@types/pg": "^8.20.0",
     "@types/supertest": "^7.2.1",
+    "dotenv": "^17.4.2",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",
     "jest": "^30.4.2",
     "prettier": "^3.9.5",
     "supertest": "^7.2.2",
     "ts-jest": "^29.4.11",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^7.0.2"
+    "tsx": "^4.23.1",
+    "typescript": "^6.0.3"
   }
 }
