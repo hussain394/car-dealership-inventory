@@ -11,7 +11,7 @@ export const VehicleCard = ({ vehicle, onPurchase, isPurchasing }: VehicleCardPr
   const outOfStock = vehicle.quantity === 0;
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+    <div className="flex flex-col gap-3 rounded-xl border border-brand-100 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-lg">
       <div className="flex items-start justify-between">
         <div>
           <h3 className="text-base font-semibold text-slate-900">
@@ -21,7 +21,7 @@ export const VehicleCard = ({ vehicle, onPurchase, isPurchasing }: VehicleCardPr
         </div>
         <span
           className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-            outOfStock ? 'bg-red-50 text-red-600' : 'bg-emerald-50 text-emerald-600'
+            outOfStock ? 'bg-red-50 text-red-600' : 'bg-brand-50 text-brand-700'
           }`}
         >
           {outOfStock ? 'Out of stock' : `${vehicle.quantity} in stock`}

@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses = {
-  primary: 'bg-slate-900 text-white hover:bg-slate-700 disabled:bg-slate-300',
+  primary: 'bg-brand-700 text-white hover:bg-brand-800 disabled:bg-slate-300',
   secondary: 'bg-white text-slate-900 border border-slate-300 hover:bg-slate-50',
   danger: 'bg-red-600 text-white hover:bg-red-700 disabled:bg-red-200',
 };
