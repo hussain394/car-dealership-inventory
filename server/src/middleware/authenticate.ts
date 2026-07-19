@@ -17,8 +17,10 @@ export const authenticate = (
   }
 
   const token = header.split(' ')[1];
+  const secret = process.env.JWT_SECRET as string;
+
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET as string) as {
+    const payload = jwt.verify(token, secret) as unknown as {
       userId: number;
       role: string;
     };

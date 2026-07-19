@@ -13,6 +13,7 @@ const sampleVehicle = {
   category: 'Sedan',
   price: '28500.00',
   quantity: 5,
+  image_url: null,
 };
 
 beforeEach(() => jest.clearAllMocks());
