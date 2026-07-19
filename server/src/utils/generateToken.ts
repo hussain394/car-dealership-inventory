@@ -6,10 +6,12 @@ export interface TokenPayload {
 }
 
 export const generateToken = (payload: TokenPayload): string => {
-  const secret = process.env.JWT_SECRET as string;
-  const options: SignOptions = {
-    expiresIn: (process.env.JWT_EXPIRES_IN ?? '1h') as SignOptions['expiresIn'],
-  };
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is not set');
+  }
 
-  return jwt.sign(payload, secret, options);
+  const expiresIn = process.env.JWT_EXPIRES_IN ?? '1h';
+
+  return jwt.sign(payload, secret, { expiresIn } as SignOptions);
 };

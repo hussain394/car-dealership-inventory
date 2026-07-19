@@ -16,8 +16,15 @@ export const authenticate = (
     return next(new ApiError(401, 'Missing or malformed authorization header'));
   }
 
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    return next(new ApiError(500, 'Server misconfiguration: missing JWT secret'));
+  }
+
   const token = header.split(' ')[1];
-  const secret = process.env.JWT_SECRET as string;
+  if (!token) {
+    return next(new ApiError(401, 'Missing or malformed authorization header'));
+  }
 
   try {
     const payload = jwt.verify(token, secret) as unknown as {
