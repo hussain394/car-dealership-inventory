@@ -69,4 +69,22 @@ npm run test
 - Used it for the Tailwind design pass — picking a non-default color palette and type scale so the UI didn't look like default Tailwind output.
 
 **Reflection:** AI assistance was most valuable for scaffolding — getting a consistent, correctly-typed skeleton across many small files quickly — and for catching things I might not have thought to test up front, like the out-of-stock/not-found split in the purchase flow and the concurrency edge case. It was least useful as a substitute for actually understanding the SQL and auth flow; I still had to trace through and verify the atomic update logic, the JWT middleware order, and the admin-guard placement myself, since those are exactly the places where a subtly wrong suggestion would be hard to catch later. Net effect: faster on boilerplate and test scaffolding, but the architectural decisions and correctness-critical logic (auth, concurrency, validation) still required my own review line by line.
-EOF
+
+
+## Screenshots
+
+### Login
+![Login page](docs/screenshots/login.png)
+
+### Register
+[Register page] (docs/screenshots/register.png)
+
+### user dashboard
+(docs/screenshots/user_dash.png)
+(docs/screenshots/user_dashboard.png)
+
+### Admin
+(docs/screenshots/admin_addvehicles.png)
+(docs/screenshots/admin-dashboard.png)
+(docs/screenshots/admin_edit.png)
+(docs/screenshots/admin_page.png)
